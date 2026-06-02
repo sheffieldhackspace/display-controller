@@ -60,18 +60,22 @@ else
   ngames=$(
     echo "${games}" | jq 'length'
   )
-  start_ts=$(
-    echo "${games}" | jq -r '.[0] | .START_TS'
-  )
-  now=$(date '+%s')
-  days_until=$(( ( $start_ts - $now ) / (24 * 3600) ))
-  msg="NXT FTBALL GAME\n in ${days_until} days (1 of ${ngames})\n"$(
-    echo "${games}" \
-      | jq -r '.[0]
-        | "\(.SUMMARY)"
-      ' \
-      | sed -E 's+Sheffield United+Blades+;s+^(.{18}).*+\1+'
-  )"\n"$(date --date="@${start_ts}" '+%a %d %b, %H:%M')
+  if [[ "${ngames}" == 0 ]]; then
+    msg="NXT FTBALL GAME\n no games found\n on website!"
+  else
+		start_ts=$(
+		  echo "${games}" | jq -r '.[0] | .START_TS'
+		)
+		now=$(date '+%s')
+		days_until=$(( ( $start_ts - $now ) / (24 * 3600) ))
+		msg="NXT FTBALL GAME\n in ${days_until} days (1 of ${ngames})\n"$(
+		  echo "${games}" \
+		    | jq -r '.[0]
+		      | "\(.SUMMARY)"
+		    ' \
+		    | sed -E 's+Sheffield United+Blades+;s+^(.{18}).*+\1+'
+		)"\n"$(date --date="@${start_ts}" '+%a %d %b, %H:%M')
+  fi
 fi
 
 jq -cn --argjson msg "\"${msg}\"" '{
