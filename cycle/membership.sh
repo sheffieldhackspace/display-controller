@@ -2,7 +2,7 @@
 
 rawhtml=$(
   curl -s --fail \
-    "https://wiki.sheffieldhackspace.org.uk/members/membership"
+    "https://wiki.sheffieldhackspace.org.uk/public/membership"
 )
 
 if [[ "${?}" != 0 ]]; then
