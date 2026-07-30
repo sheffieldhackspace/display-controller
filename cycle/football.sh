@@ -68,7 +68,7 @@ else
 		)
 		now=$(date '+%s')
 		days_until=$(( ( $start_ts - $now ) / (24 * 3600) ))
-		msg="NXT FTBALL GAME\n in ${days_until} days (1 of ${ngames})\n"$(
+		msg="NXT FTBALL GAME\n ${days_until} days (1 of ${ngames})\n"$(
 		  echo "${games}" \
 		    | jq -r '.[0]
 		      | "\(.SUMMARY)"

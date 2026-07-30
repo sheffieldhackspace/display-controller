@@ -2,7 +2,7 @@
 # show icon and "Sheffield Hackspace"
 # for icon see icons/shhm.bmp in https://github.com/sheffieldhackspace/train-signs
 
-EMF_START_DATE="2026-07-16"
+EMF_START_DATE="2028-07-16"
 
 now=$(date '+%s')
 then=$(date --date="${EMF_START_DATE}" '+%s')
@@ -50,8 +50,10 @@ days_until_text=$(
       '
 )
 
+# "text": " \($d)      \nDAYS UNTIL\n WILL THINKS\n OF EMF CAMP",
+
 jq -cn --arg d "${days_until}"  '{
-  "text": " \($d)      \nDAYS UNTIL\n EMF CAMP",
+  "text": " 0 DAYS   \nUNTIL WILL\n MUST PLAN  \n EMF CAMP  ",
   "text_size": 1,
   "text_wrap": false,
   "flashing": false,
